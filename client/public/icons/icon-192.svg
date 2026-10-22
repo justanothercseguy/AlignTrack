@@ -1,0 +1,14 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9B8AFB" />
+      <stop offset="100%" stop-color="#7775E8" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="48" fill="url(#grad1)" />
+  <!-- Stylized Aligner Smile Arc -->
+  <path d="M48 110C60 134 132 134 144 110" stroke="white" stroke-width="12" stroke-linecap="round" />
+  <!-- Sparkle -->
+  <path d="M136 60L140 74L154 78L140 82L136 96L132 82L118 78L132 74Z" fill="#FFF0EB" />
+  <circle cx="64" cy="74" r="8" fill="white" opacity="0.8" />
+</svg>

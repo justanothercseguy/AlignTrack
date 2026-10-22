@@ -1,0 +1,26 @@
+import { CorsOptions } from 'cors';
+import env from './env';
+
+export const corsOptions: CorsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    const allowedOrigins = env.CORS_ORIGIN.split(',').map((o) => o.trim());
+
+    if (allowedOrigins.includes(origin) || env.NODE_ENV === 'development' || origin.includes('localhost')) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['X-Total-Count', 'X-Total-Pages'],
+  maxAge: 86400, // 24 hours
+};
+
+export default corsOptions;

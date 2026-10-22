@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#F8F7FF] text-[#292747] antialiased selection:bg-[#E9E3FF] selection:text-[#5A54C7];
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom FullCalendar Styling */
+.custom-fullcalendar .fc {
+  font-family: inherit;
+  --fc-border-color: #E9E3FF;
+  --fc-today-bg-color: #F8F7FF;
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: #F8F7FF;
+}
+
+.custom-fullcalendar .fc-toolbar-title {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: #292747 !important;
+}
+
+.custom-fullcalendar .fc-button {
+  background-color: #F8F7FF !important;
+  border-color: #E9E3FF !important;
+  color: #7775E8 !important;
+  border-radius: 9999px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 0.35rem 0.85rem !important;
+  text-transform: capitalize !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease;
+}
+
+.custom-fullcalendar .fc-button:hover {
+  background-color: #E9E3FF !important;
+  color: #5A54C7 !important;
+}
+
+.custom-fullcalendar .fc-button-active,
+.custom-fullcalendar .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #7775E8 !important;
+  border-color: #7775E8 !important;
+  color: #FFFFFF !important;
+}
+
+.custom-fullcalendar .fc-col-header-cell {
+  background-color: #F8F7FF;
+  padding: 0.5rem 0 !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8885A5;
+  text-transform: uppercase;
+  border-color: #E9E3FF !important;
+}
+
+.custom-fullcalendar .fc-daygrid-day-number {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #292747;
+  padding: 0.35rem 0.5rem !important;
+}
+
+.custom-fullcalendar .fc-event {
+  border-radius: 6px !important;
+  padding: 2px 4px !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.custom-fullcalendar .fc-day-today .fc-daygrid-day-number {
+  background-color: #9B8AFB;
+  color: white !important;
+  border-radius: 9999px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
