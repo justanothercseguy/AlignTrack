@@ -34,22 +34,47 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
-// Health check
+// Health check & root status
+app.get('/', (req, res) => {
+  res.json({ success: true, message: 'AlignTrack Backend API is live and running!' });
+});
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
-// Routes
+// Routes (supports both /api/xxx and /xxx)
 app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
+
 app.use('/api/aligner-sets', alignerSetRoutes);
+app.use('/aligner-sets', alignerSetRoutes);
+
 app.use('/api/wear-sessions', wearSessionRoutes);
+app.use('/wear-sessions', wearSessionRoutes);
+
 app.use('/api/appointments', appointmentRoutes);
+app.use('/appointments', appointmentRoutes);
+
 app.use('/api/journal', journalRoutes);
+app.use('/journal', journalRoutes);
+
 app.use('/api/questions', questionRoutes);
+app.use('/questions', questionRoutes);
+
 app.use('/api/notifications', notificationRoutes);
+app.use('/notifications', notificationRoutes);
+
 app.use('/api/calendar', calendarRoutes);
+app.use('/calendar', calendarRoutes);
+
 app.use('/api/reports', reportRoutes);
+app.use('/reports', reportRoutes);
+
 app.use('/api/settings', settingsRoutes);
+app.use('/settings', settingsRoutes);
 
 // 404 handler
 app.use((req, res) => {

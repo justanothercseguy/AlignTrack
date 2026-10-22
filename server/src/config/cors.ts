@@ -10,7 +10,13 @@ export const corsOptions: CorsOptions = {
 
     const allowedOrigins = env.CORS_ORIGIN.split(',').map((o) => o.trim());
 
-    if (allowedOrigins.includes(origin) || env.NODE_ENV === 'development' || origin.includes('localhost')) {
+    if (
+      allowedOrigins.includes(origin) ||
+      allowedOrigins.includes('*') ||
+      env.NODE_ENV === 'development' ||
+      origin.includes('localhost') ||
+      origin.endsWith('.vercel.app')
+    ) {
       callback(null, true);
     } else {
       callback(new Error(`Origin ${origin} not allowed by CORS`));
