@@ -1,8 +1,12 @@
 import app from '../src/app';
 import { connectDatabase } from '../src/config/database';
 
-connectDatabase().catch((err) => {
-  console.warn('Database connection warning in serverless:', err);
-});
+export default async function handler(req: any, res: any) {
+  try {
+    await connectDatabase();
+  } catch (err) {
+    console.error('Database connection error in serverless handler:', err);
+  }
+  return app(req, res);
+}
 
-export default app;

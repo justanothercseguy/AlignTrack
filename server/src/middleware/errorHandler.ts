@@ -38,7 +38,7 @@ export const errorHandler = (
   }
 
   // Default unhandled error
-  const message = env.NODE_ENV === 'production' ? 'Internal server error' : err.message;
+  const message = err.message || 'Internal server error';
   console.error('Unhandled Server Error:', err);
   sendError(res, message, 500);
 };
