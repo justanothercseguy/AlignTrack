@@ -21,10 +21,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchUser = async () => {
     try {
-      if (token) {
+      const storedToken = localStorage.getItem('aligntrack_token');
+      if (storedToken && storedToken !== 'undefined' && storedToken !== 'null') {
         const data = await getMeApi();
         setUser(data.user);
       } else {
+        localStorage.removeItem('aligntrack_token');
+        setToken(null);
         setUser(null);
       }
     } catch (err) {
@@ -42,18 +45,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (credentials: any) => {
     const res = await loginApi(credentials);
-    const newToken = res.data.token;
-    localStorage.setItem('aligntrack_token', newToken);
-    setToken(newToken);
-    setUser(res.data.user);
+    const authData = res.data?.data || res.data;
+    const newToken = authData?.token;
+    const newUser = authData?.user;
+    if (newToken) {
+      localStorage.setItem('aligntrack_token', newToken);
+      setToken(newToken);
+    }
+    if (newUser) {
+      setUser(newUser);
+    }
   };
 
   const register = async (data: any) => {
     const res = await registerApi(data);
-    const newToken = res.data.token;
-    localStorage.setItem('aligntrack_token', newToken);
-    setToken(newToken);
-    setUser(res.data.user);
+    const authData = res.data?.data || res.data;
+    const newToken = authData?.token;
+    const newUser = authData?.user;
+    if (newToken) {
+      localStorage.setItem('aligntrack_token', newToken);
+      setToken(newToken);
+    }
+    if (newUser) {
+      setUser(newUser);
+    }
   };
 
   const logout = () => {

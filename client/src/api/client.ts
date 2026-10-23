@@ -16,7 +16,7 @@ const client = axios.create({
 // Interceptor to attach Authorization Bearer token
 client.interceptors.request.use((config) => {
   const token = localStorage.getItem('aligntrack_token');
-  if (token && config.headers) {
+  if (token && token !== 'undefined' && token !== 'null' && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;

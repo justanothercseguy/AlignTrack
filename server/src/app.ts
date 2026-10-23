@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -43,6 +44,26 @@ app.get('/api/health', (req, res) => {
 });
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+app.get('/api/db-status', async (req, res) => {
+  let connectionError = null;
+  if (mongoose.connection.readyState !== 1 && process.env.MONGODB_URI) {
+    try {
+      await mongoose.connect(process.env.MONGODB_URI, {
+        serverSelectionTimeoutMS: 4000,
+      });
+    } catch (e: any) {
+      connectionError = e.message || String(e);
+    }
+  }
+  res.json({
+    readyState: mongoose.connection.readyState, // 1 = connected, 0 = disconnected
+    isConnected: mongoose.connection.readyState === 1,
+    hasMongoUri: !!process.env.MONGODB_URI,
+    mongoUriPrefix: process.env.MONGODB_URI ? process.env.MONGODB_URI.split('@')[1] || 'hidden' : 'NOT_SET',
+    dbName: mongoose.connection.name || null,
+    error: connectionError
+  });
 });
 
 // Routes (supports both /api/xxx and /xxx)
