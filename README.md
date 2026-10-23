@@ -46,64 +46,6 @@
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v18 or higher recommended)
-- npm or yarn
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/justanothercseguy/AlignTrack.git
-cd AlignTrack
-```
-
-### 2. Backend Setup
-```bash
-cd server
-npm install
-```
-
-Create a `.env` file inside `server/` (see `.env.example`):
-```env
-PORT=5000
-NODE_ENV=development
-JWT_SECRET=your_jwt_secret_key_here
-CLIENT_URL=http://localhost:3000
-# MONGODB_URI=mongodb://localhost:27017/aligntrack (optional if using local JSON database)
-```
-
-Start the backend:
-```bash
-# Run in development mode
-npm run dev
-
-# Or build and run production build
-npm run build
-npm start
-```
-
-### 3. Frontend Setup
-In a new terminal window:
-```bash
-cd client
-npm install
-```
-
-Create a `.env` file inside `client/`:
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-Start the Vite development server:
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
 ## 📁 Project Structure
 
 ```text
@@ -136,6 +78,3 @@ AlignTrack/
 - **Backend**: Can be deployed on [Render](https://render.com/), [Railway](https://railway.app/), or any Node.js hosting platform.
 
 ---
-
-## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
