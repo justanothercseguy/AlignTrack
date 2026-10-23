@@ -2,12 +2,16 @@ import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
 
-const DATA_DIR = path.resolve(__dirname, '../../data');
+const DATA_DIR = process.env.VERCEL ? path.join('/tmp', 'aligntrack-data') : path.resolve(__dirname, '../../data');
 const DB_FILE = path.join(DATA_DIR, 'db.json');
 
 // Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (err) {
+  console.warn('Could not create data dir:', err);
 }
 
 export interface LocalDatabaseState {

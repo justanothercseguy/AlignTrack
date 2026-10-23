@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-let envApi = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-// Remove trailing slashes
+// In production on Vercel, API is served from the same origin under /api
+// In local dev, Vite proxy forwards /api to http://localhost:5000
+let envApi = import.meta.env.VITE_API_URL || '/api';
 envApi = envApi.replace(/\/+$/, '');
-// Ensure it points to /api
 const API_BASE = envApi.endsWith('/api') ? envApi : `${envApi}/api`;
 
 const client = axios.create({

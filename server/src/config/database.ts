@@ -3,11 +3,14 @@ import env from './env';
 import { loadDb } from '../services/localDb';
 
 export const connectDatabase = async (): Promise<void> => {
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
   try {
-    // Attempt connecting with short timeout so we don't stall server startup
+    // Attempt connecting with 5s timeout
     await mongoose.connect(env.MONGODB_URI, {
       maxPoolSize: 10,
-      serverSelectionTimeoutMS: 2000,
+      serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 10000,
     });
     console.log('MongoDB connected successfully');
